@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/semantic/semantic.min.css">
+    <style>
+        .main{
+            margin-top:7em;
+        }
+    </style>
+    <title>Livre d'Or</title>
+</head>
+<body> 
+    <div class="ui fixed inverted menu">
+        <a href="/" class="header item">
+            Accueil
+        </a>
+    </div>
+    <div class="ui main container">
+        <% if (locals.flash && locals.flash.error) { %>
+            <div class="ui negative message">
+                <%= flash.error %>
+            </div>
+        <% } %>
