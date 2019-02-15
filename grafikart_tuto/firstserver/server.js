@@ -1,32 +1,6 @@
-let http = require('http')
 let fs = require('fs')
-let url = require('url')
-let queryString = require('querystring')
-let EventEmitter = require('events')
 
-let App = {
-    start: function(port){
-        let emitter = new EventEmitter()
-        let server = http.createServer((request,response) => {
-            if (request.url.split ==='/'){
-                response.writeHead(200,{"Content-Type":"text/html"})
-                emitter.emit('root',response)
-            }
-            else if (request.url.split('?')[0] === '/namepage'){
-                let param = queryString.parse(url.parse(request.url).query)['name'] === undefined ? 'anonyme' : queryString.parse(url.parse(request.url).query)['name']
-                emitter.emit('namepage',param,response)
-            }
-            else{
-                emitter.emit('notFound', response)
-            }
-        }
-        )
-        server.listen(port)
-        return emitter
-    }
-}
-
-let app = App.start(8080)
+let app = require('./app').start(3000)
 
 app.on('root',(response)=>{
     response.write('Page d\'acceuil')
@@ -47,6 +21,7 @@ app.on('namepage',(name,response)=>{
 })
 app.on('notFound',(response)=>{
     response.write('Page Not Found')
+    response.end()
 })
 
 
