@@ -25,8 +25,8 @@ io.sockets.on('connection',(socket)=>{
     })
     socket.on('log',(message)=>{
         console.log(socket.pseudo + ' a envoyé le message suivant : '+ message)
-        socket.emit('chat',(message,socket.pseudo))
-        socket.broadcast.emit('chat',(message,socket.pseudo))
+        socket.emit('chat',{message:message,pseudo:socket.pseudo})
+        socket.broadcast.emit('chat',{message:message,pseudo:socket.pseudo})
     })
 })
 

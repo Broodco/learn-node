@@ -1,3 +1,48 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+let feed = document.querySelector('.feed')
+let pseudo = prompt('Veuillez entrer un pseudonyme')
+let socket = io.connect('http://localhost:8080')
+socket.emit('newUser',pseudo)
+
+// Emits message when form sent
+document.querySelector('#send').addEventListener('click',(e)=>{
+    e.preventDefault()
+    let message = document.querySelector('#message').value
+    document.querySelector('#message').value=''
+    socket.emit('log',message)
+})
+// Receive message and add it to the feed
+socket.on('chat',(message,pseudo)=>{
+    feed.prepend(addFrag(message,pseudo))
+})
+
+function addFrag(message){
+    console.log(message)
+    let docFrag = document.createDocumentFragment()
+    let event = document.createElement('div')
+    event.className = 'event'
+    let content = document.createElement('div')
+    content.className = 'content'
+    let summary = document.createElement('div')
+    summary.className='summary'
+    let dat = document.createElement('div')
+    dat.className = 'date'
+    let extxt = document.createElement('div')
+    extxt.className = 'extra text'
+    tim = new Date()
+    dat.innerHTML = tim
+    summary.innerHTML=message.pseudo
+    extxt.innerHTML = message.message
+    summary.appendChild(dat)
+    content.appendChild(summary)
+    content.appendChild(extxt)
+    event.appendChild(content)
+    docFrag.appendChild(event)
+    return docFrag
+}
+</script> 
+
 </div>
 </body>
 </html>
