@@ -1,0 +1,17 @@
+{
+  "name": "chatbox",
+  "version": "0.1.0",
+  "description": "TP from Openclassrooms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maxime Broodcoorens",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "semantic-ui": "^2.4.2",
+    "session.socket.io": "^0.2.1",
+    "socket.io": "^2.2.0"
+  }
+}

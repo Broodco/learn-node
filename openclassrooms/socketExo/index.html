@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket Test</title>
+</head>
+<body>
+
+    <h1>Communication à socket.io</h1>
+    <p><input type="button" value="Pinger le serveur" id="poke"/></p>
+
+
+
+<!-- Récupération du socket par le client -->
+    <script src="/socket.io/socket.io.js"></script>
+<!-- Actions coté client -->
+    <script>
+        // Demande du pseudo au visiteur
+        let pseudo = prompt('Quel est ton pseudo?')
+
+        let socket = io.connect('http://localhost:8080')
+
+    // Envoi du pseudo au serveur
+        socket.emit('newUser',pseudo)
+
+    // Affichage d'une boite de dialogue lors de la réception d'un message
+        socket.on('message',(message)=>{
+            alert('Le serveur a un message pour vous : '+ message)
+        })
+    // Envoi d'un message au serveur lors d'un click sur le bouton
+        document.querySelector('#poke').addEventListener('click',()=>{
+            socket.emit('message','Bonjour serveur')
+        })    
+    </script>
+</body>
+</html>
