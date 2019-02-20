@@ -2,7 +2,7 @@
 <script>
 let feed = document.querySelector('.feed')
 let pseudo = prompt('Veuillez entrer un pseudonyme')
-let socket = io.connect('http://localhost:8080')
+let socket = io.connect('http://10.20.1.71:8080')
 socket.emit('newUser',pseudo)
 
 // Emits message when form sent

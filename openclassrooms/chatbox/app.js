@@ -29,6 +29,5 @@ io.sockets.on('connection',(socket)=>{
         socket.broadcast.emit('chat',{message:message,pseudo:socket.pseudo})
     })
 })
-
 // Listen to port
 server.listen(8080)
