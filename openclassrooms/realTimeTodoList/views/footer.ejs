@@ -1,14 +1,17 @@
 <script src="/socket.io/socket.io.js"></script>
+<script src="/assets/semantic/semantic.min.js"></script>
 <script>
-let itemsBox = document.querySelector('.itemsList')
-let socket = io.connect('10.20.1.71:8080')
+let itemsBox = document.querySelector('.segments')
+let socket = io.connect('localhost:8080')
 
-// Sends item to server when form in sent
-document.querySelector('#send').addEventListener('click',(e)=>{
+// Sends item to server when pressing enter on input
+document.querySelector('#newtodo').addEventListener('keyup',(e)=>{
     e.preventDefault()
-    let item = document.querySelector('#newtodo').value
-    document.querySelector('#newtodo').value=''
-    socket.emit('store',item)
+    if(e.keyCode == 13){
+        let item = document.querySelector('#newtodo').value
+        document.querySelector('#newtodo').value=''
+        socket.emit('store',item)
+    }
 })
         // Socket events
 // When receiving an add order
@@ -22,28 +25,26 @@ socket.on('deleteOrder',(index)=>{
 })
 
     // Functions
-// Creates a doc fragment to insert in the DOM laer
+// Creates a doc fragment to insert in the DOM later / Sorry about the mess
 function addFrag(item){
     let docFrag = document.createDocumentFragment()
-    let listItem = document.createElement('li')
-    let xBtn = document.createElement('span')
-    xBtn.className = 'delete'
-    xBtn.innerHTML = 'X'
-    xBtn.addEventListener('click',(e)=>{
+    let listItem = document.createElement('div')
+    listItem.className = 'item ui segment'
+    let delBtn = document.createElement('button')    
+    delBtn.className = 'ui negative basic button'
+    delBtn.innerHTML = 'Delete'
+    delBtn.addEventListener('click',(e)=>{
         arr = Array.from(itemsBox.children)
         index = arr.indexOf(e.target.parentNode)
         socket.emit('remove',index)
     })
-    let content = document.createElement('p')
-    content.className = 'content'
+    let content = document.createElement('span')
     content.innerHTML = item
-    listItem.appendChild(xBtn)
+    listItem.appendChild(delBtn)
     listItem.appendChild(content)
     docFrag.appendChild(listItem)
     return docFrag
 }
-
-
 </script>
 </body>
 </html>

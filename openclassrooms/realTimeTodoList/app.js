@@ -23,7 +23,6 @@ io.sockets.on('connection',(socket)=>{
     if (items.length != 0){
         for (i =0 ; i<items.length; i++){
         socket.emit('addOrder',items[i])
-        socket.broadcast.emit('addOrder',items[i])
         }
     }
     // When receiving new item from client

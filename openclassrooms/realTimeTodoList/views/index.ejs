@@ -1,11 +1,17 @@
 <% include header %>
 
-<h1>Todo List en temps réel</h1>
-<form>
-<label for="newtodo">Nouvelle entrée : </label>
-<input type="text" name="newtodo" id="newtodo" autofocus/>
-<input type="submit" id="send"/>
-</form>
-<ul class="itemsList">
-</ul>
-<% include footer %>
+<h1 class='ui center aligned icon header'>
+    <i class='circular edit icon'></i>
+    Real Time Interactive TodoList
+</h1>
+<div class="ui container">
+    <div class="ui fluid icon input">
+        <i class='write icon' id="send"></i>
+        <input type="text" name="newtodo" id="newtodo" placeholder='New Todo Item' autofocus/>
+    </div>
+    <div class="ui segments">
+    </div>
+</div>
+<% include footer %> 
+
+
